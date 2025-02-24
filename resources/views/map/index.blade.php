@@ -6,10 +6,8 @@
   </x-slot>
   <div class="py-12">
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <x-primary-button onclick="window.location='{{ route('map.index') }}'">
-        {{ __('Go to Map') }}
-      </x-primary-button>
-
+      @include('map.partials.view-map')
+      @include('map.partials.locations-list', ['lines' => $lines])
     </div>
   </div>
 </x-app-layout>
