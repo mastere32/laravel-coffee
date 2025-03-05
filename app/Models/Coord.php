@@ -15,4 +15,9 @@ class Coord extends Model
         'longitude',
         'altitude',
     ];
+
+    public function map()
+    {
+        return $this->hasOne(Map::class);
+    }
 }

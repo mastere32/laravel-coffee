@@ -14,8 +14,10 @@ Route::get('/dashboard', function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('map', [MapController::class, 'index'])->name('map.index');
-    Route::get('map/{id}', [MapController::class, 'show'])->name('map.show');
+    Route::get('/map', [MapController::class, 'index'])->name('map.index');
+    Route::get('/map/fetchAllCoordinates', [MapController::class, 'fetchAllCoordinates'])->name('map.fetchAllCoordinates');
+    Route::get('/map/{id}', [MapController::class, 'show'])->name('map.show');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
