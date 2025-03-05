@@ -9,7 +9,7 @@
 .env
 .env.backup
 .env.production
-.env.example
+#.env.example
 .phpactor.json
 .phpunit.result.cache
 Homestead.json
@@ -20,5 +20,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.nova
-/.vscode
+#/.vscode
 /.zed

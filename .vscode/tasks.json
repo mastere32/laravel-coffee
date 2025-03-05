@@ -1,0 +1,38 @@
+// adding the extension https://marketplace.visualstudio.com/items?itemName=actboy168.tasks allows to run the following tasks from the navbar
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Docker Bash",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "exec",
+        "-it",
+        "8ed2b1812cadee9782db133884521c48053a992adabff1900ac70d24109e37d0",
+        "/bin/bash"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Vite Dev",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "exec",
+        "-it",
+        "8ed2b1812cadee9782db133884521c48053a992adabff1900ac70d24109e37d0",
+        "/bin/bash",
+        "-c",
+        "npm run dev"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
