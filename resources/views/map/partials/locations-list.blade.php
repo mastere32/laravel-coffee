@@ -18,18 +18,30 @@
     }
   </script>
 
-  @foreach ($lines as $map)
+  @foreach ($maps as $map)
     <div class="m-4 flex justify-between overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
       <div class="h-100 flex flex-col justify-between gap-1 p-3 dark:text-gray-100">
         <span class="text-bold ml-2">{{ $map->title }}</span>
         <a href="{{ $map->url }}" target="_blank"
           class="btn btn-gray-200 rounded px-2 font-bold dark:bg-gray-700 dark:text-gray-100"> Check it out! </a>
       </div>
-      <div>
+      <div class="flex flex-row align-bottom">
+        <div class="h-100 flex flex-col justify-between gap-1 p-3 dark:text-gray-100">
+          @if ($map->coord)
+            <button class="btn btn-gray-200 rounded p-1 font-bold dark:bg-gray-700 dark:text-gray-100"
+              onclick="toggleOnMap({{ $map->coord->latitude }}, {{ $map->coord->longitude }}, '{{ $map->coord->id }}')">
+              Show on map
+            </button>
+            <button class="btn btn-gray-200 rounded p-1 font-bold dark:bg-gray-700 dark:text-gray-100"
+              onclick="centerOnMap({{ $map->coord->latitude }}, {{ $map->coord->longitude }}, '{{ $map->coord->id }}')">
+              Center
+            </button>
+          @endif
+        </div>
         <div class="h-100 flex flex-col justify-between gap-1 p-3 dark:text-gray-100">
           <a href="{{ route('map.edit', $map->id) }}"
             class="btn btn-gray-200 mr-2 rounded px-2 font-bold dark:bg-gray-700 dark:text-gray-100">
-            <span class="material-icons p-1">
+            <span class="material-icons pt-1">
               edit
             </span>
           </a>
@@ -37,23 +49,11 @@
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-red-500 rounded px-2 font-bold dark:bg-gray-700 dark:text-gray-100">
-              <span class="material-icons p-1">
+              <span class="material-icons pt-1">
                 delete
               </span>
             </button>
           </form>
-        </div>
-        <div class="h-100 flex flex-col justify-between gap-1 p-3 dark:text-gray-100">
-          @if ($map->coord)
-            <button class="btn btn-gray-200 rounded px-2 font-bold dark:bg-gray-700 dark:text-gray-100"
-              onclick="toggleOnMap({{ $map->coord->latitude }}, {{ $map->coord->longitude }}, '{{ $map->coord->id }}')">
-              Show on map
-            </button>
-            <button class="btn btn-gray-200 rounded px-2 font-bold dark:bg-gray-700 dark:text-gray-100"
-              onclick="centerOnMap({{ $map->coord->latitude }}, {{ $map->coord->longitude }}, '{{ $map->coord->id }}')">
-              Center
-            </button>
-          @endif
         </div>
       </div>
     </div>
