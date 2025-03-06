@@ -12,13 +12,16 @@ class MapController extends Controller
 {
     public function index()
     {
-        $lines = Map::with('Coord')->get();
-        return view('map/index', ['lines' => $lines]);
+        $maps = Map::with('Coord')->get();
+        return view('map/index', ['maps' => $maps]);
     }
 
-    public function show($id)
+    public function show($map)
     {
-        return view('map/show', ['id' => $id]);
+        $map = Map::with('Coord')->findOrFail($map);
+        return view('map/show', ['map' => $map]);
+    }
+
     }
 
     public function fetchAllCoordinates()

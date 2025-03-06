@@ -7,7 +7,7 @@
   <div class="py-12">
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
       @include('map.partials.view-map')
-      @include('map.partials.locations-list', ['lines' => $lines])
+      @include('map.partials.locations-list', ['maps' => $maps])
     </div>
   </div>
 </x-app-layout>
