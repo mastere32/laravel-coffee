@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->float('latitude');
             $table->float('longitude');
-            $table->float('altitude');
+            $table->string('altitude');
         });
     }
 

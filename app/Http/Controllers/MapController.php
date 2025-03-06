@@ -22,6 +22,52 @@ class MapController extends Controller
         return view('map/show', ['map' => $map]);
     }
 
+    public function edit(Map $map)
+    {
+        return view('map/edit', ['map' => $map]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'string',
+            'url' => 'url',
+            'note' => 'string',
+            'comment' => 'string',
+        ]);
+
+        $map = Map::findOrFail($id);
+        $coord = $map->coord;
+
+        $map->update($request->only(['title', 'url', 'note', 'comment']));
+        $validatedCoords = $request->validate([
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'altitude_value' => 'required|string',
+        ]);
+        if ($validatedCoords) {
+            $validatedCoords['altitude'] = $validatedCoords['altitude_value'] . 'z';
+            unset($validatedCoords['altitude_value']);
+            if ($coord) {
+                foreach ($validatedCoords as $key => $value) {
+                    $coord[$key] = $value;
+                }
+                //$coord->save();
+            } else {
+                $coord = new Coord($validatedCoords);
+            }
+            if ($coord->save()) {
+                $map->coord()->associate($coord);
+            }
+        }
+
+        return redirect()->route('map.show', ['map' => $map])->with('success', 'Map updated successfully');
+    }
+
+    public function destroy(Map $map)
+    {
+        $map->delete();
+        return redirect()->route('map.index')->with('success', 'Map deleted successfully');
     }
 
     public function fetchAllCoordinates()

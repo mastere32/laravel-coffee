@@ -9,11 +9,12 @@ class Coord extends Model
 {
     /** @use HasFactory<\Database\Factories\CoordFactory> */
     use HasFactory;
+    public $altitude_value = null;
 
     protected $fillable = [
         'latitude',
         'longitude',
-        'altitude',
+        'altitude_value',
     ];
 
     public function map()

@@ -25,6 +25,24 @@
         <a href="{{ $map->url }}" target="_blank"
           class="btn btn-gray-200 rounded px-2 font-bold dark:bg-gray-700 dark:text-gray-100"> Check it out! </a>
       </div>
+      <div>
+        <div class="h-100 flex flex-col justify-between gap-1 p-3 dark:text-gray-100">
+          <a href="{{ route('map.edit', $map->id) }}"
+            class="btn btn-gray-200 mr-2 rounded px-2 font-bold dark:bg-gray-700 dark:text-gray-100">
+            <span class="material-icons p-1">
+              edit
+            </span>
+          </a>
+          <form method="POST" action="{{ route('map.destroy', $map->id) }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-red-500 rounded px-2 font-bold dark:bg-gray-700 dark:text-gray-100">
+              <span class="material-icons p-1">
+                delete
+              </span>
+            </button>
+          </form>
+        </div>
         <div class="h-100 flex flex-col justify-between gap-1 p-3 dark:text-gray-100">
           @if ($map->coord)
             <button class="btn btn-gray-200 rounded px-2 font-bold dark:bg-gray-700 dark:text-gray-100"
@@ -36,6 +54,7 @@
               Center
             </button>
           @endif
+        </div>
       </div>
     </div>
   @endforeach
